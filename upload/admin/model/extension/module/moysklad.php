@@ -149,5 +149,5 @@ class ModelExtensionModuleMoysklad extends Model
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_description");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_group");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_group_description");
-	}
+    }
 }
