@@ -26,7 +26,7 @@ class ModelExtensionModuleMoysklad extends Model
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "attribute_group_description AS agd WHERE agd.language_id = '" . (int)$this->config->get('config_language_id') . "' AND agd.name = '" . $this->db->escape($attribute_group_name) . "'");
         return $query->row;
-	}
+    }
     
     /**
      * Undocumented function
@@ -36,10 +36,10 @@ class ModelExtensionModuleMoysklad extends Model
      */
     public function getAttributeByName($attribute_name)
     {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.name = '" . $this->db->escape($attribute_name) . "' AND ad.language_id = '" . (int)$this->config->get('config_language_id') . "'");
-		return $query->row;
+        $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "attribute a LEFT JOIN " . DB_PREFIX . "attribute_description ad ON (a.attribute_id = ad.attribute_id) WHERE ad.name = '" . $this->db->escape($attribute_name) . "' AND ad.language_id = '" . (int)$this->config->get('config_language_id') . "'");
+        return $query->row;
     }
-    
+
     /**
      * Undocumented function
      *
@@ -48,10 +48,10 @@ class ModelExtensionModuleMoysklad extends Model
      */
     public function getCategoryByName($category_name)
     {
-		$query = $this->db->query("SELECT *, ( SELECT COUNT(parent_id) FROM " . DB_PREFIX . "category WHERE parent_id = c.category_id ) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.name = '" . $this->db->escape($category_name) . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name");
-		return $query->row;
+        $query = $this->db->query("SELECT *, ( SELECT COUNT(parent_id) FROM " . DB_PREFIX . "category WHERE parent_id = c.category_id ) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.name = '" . $this->db->escape($category_name) . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name");
+        return $query->row;
     }
-    
+
     /**
      * Undocumented function
      *
@@ -107,19 +107,19 @@ class ModelExtensionModuleMoysklad extends Model
     
     public function cleanDB()
     {
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_attribute");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_description");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_discount");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_image");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_option");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_option_value");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_related");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_reward");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_special");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_category");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_download");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_layout");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_attribute");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_description");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_discount");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_image");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_option");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_option_value");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_related");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_reward");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_special");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_category");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_download");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_layout");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product_to_store");
 
         $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query LIKE 'product_id=%'");
@@ -128,24 +128,24 @@ class ModelExtensionModuleMoysklad extends Model
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "option_description");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "option_value");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "option_value_description");
-        
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "order_option");
-		
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_description");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_to_store");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_to_layout");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_path");
-        
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query LIKE 'category_id=%'");
 
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "manufacturer");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "order_option");
+
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_description");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_to_store");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_to_layout");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "category_path");
+
+        $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query LIKE 'category_id=%'");
+
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "manufacturer");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "manufacturer_description");
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "manufacturer_to_store");
-        
-		$this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query LIKE 'manufacturer_id=%'");
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "manufacturer_to_store");
 
-		$this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute");
+        $this->db->query("DELETE FROM " . DB_PREFIX . "url_alias WHERE query LIKE 'manufacturer_id=%'");
+
+        $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_description");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_group");
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "attribute_group_description");
