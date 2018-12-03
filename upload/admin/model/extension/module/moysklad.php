@@ -64,13 +64,27 @@ class ModelExtensionModuleMoysklad extends Model
         $query = $this->db->query("SELECT *, ( SELECT COUNT(parent_id) FROM " . DB_PREFIX . "category WHERE parent_id = c.category_id ) AS children FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (c.category_id = cd.category_id) WHERE cd.name = '" . $this->db->escape($category_name) . "' AND c.parent_id = '" . (int)$parent_category_id . "' AND cd.language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY c.sort_order, cd.name");
         return $query->row;
     }
-    
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $external_code
+     * @return void
+     */
     public function getProductIdByExternalCode($external_code)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product AS p WHERE p.model = '" . $this->db->escape($external_code) . "'");
         return $query->row['product_id'];
     }
-    
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $external_code
+     * @param [type] $offer_type
+     * @param [type] $quantity
+     * @return void
+     */
     public function setOfferQuantity($external_code, $offer_type, $quantity)
     {
         if($offer_type === 'product') {
@@ -83,17 +97,37 @@ class ModelExtensionModuleMoysklad extends Model
         
         return TRUE;
     }
-    
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $product_external_code
+     * @param [type] $quantity
+     * @return void
+     */
     public function setProductQuantityByExternalCode($product_external_code, $quantity)
     {
         $query = $this->db->query("UPDATE " . DB_PREFIX . "product AS p SET p.quantity = '" . (int)$quantity . "' WHERE p.model = '" . $this->db->escape($product_external_code) . "'");
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param [type] $option_external_code
+     * @param [type] $quantity
+     * @return void
+     */
     public function setProductOptionQuantityByExternalCode($option_external_code, $quantity)
     {
         $query = $this->db->query("UPDATE " . DB_PREFIX . "product_option_value AS pov SET pov.quantity = '" . (int)$quantity . "' WHERE pov.model = '" . $this->db->escape($option_external_code) . "'");
     }
-    
+
+    /**
+     * Undocumented function
+     *
+     * @param [type] $external_code
+     * @return boolean
+     */
     public function issetProductByExternalCode($external_code)
     {
         $query = $this->db->query("SELECT * FROM " . DB_PREFIX . "product AS p WHERE p.model = '" . $this->db->escape($external_code) . "'");
@@ -104,7 +138,12 @@ class ModelExtensionModuleMoysklad extends Model
             return true;
         }
     }
-    
+
+    /**
+     * Undocumented function
+     *
+     * @return void
+     */
     public function cleanDB()
     {
         $this->db->query("TRUNCATE TABLE " . DB_PREFIX . "product");
